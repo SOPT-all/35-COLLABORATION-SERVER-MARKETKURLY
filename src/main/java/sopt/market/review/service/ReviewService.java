@@ -20,5 +20,4 @@ public class ReviewService {
         List<ReviewProjection> allReviewsByProductId = reviewRepository.findAllReviewsByProductId(productId);
         return ReviewsGetResponse.from(allReviewsByProductId);
     }
-
 }

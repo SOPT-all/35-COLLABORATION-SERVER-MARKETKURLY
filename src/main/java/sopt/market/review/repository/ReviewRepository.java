@@ -14,5 +14,4 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "r.isAdd AS isAdd, r.img1 AS image1, r.img2 AS image2, r.img3 AS image3, r.createdAt AS createdAt " +
             "FROM Review r WHERE r.product.id = :productId")
     List<ReviewProjection> findAllReviewsByProductId(@Param("productId") long productId);
-
 }
