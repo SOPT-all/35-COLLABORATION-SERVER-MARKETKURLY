@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    @Query(value = "SELECT * FROM products ORDER BY RAND() LIMIT ?1, nativeQuery = True")
+    @Query(value = "SELECT * FROM products ORDER BY RAND() LIMIT ?1", nativeQuery = true)
     List<Product> getRandomProducts(int count);
 
     Optional<Product> findById(Long id);

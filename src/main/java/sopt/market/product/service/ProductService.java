@@ -1,6 +1,7 @@
 package sopt.market.product.service;
 
 import org.springframework.boot.context.annotation.DeterminableImports;
+import org.springframework.stereotype.Service;
 import sopt.market.product.dto.response.DetailDataGetResponse;
 import sopt.market.product.dto.response.MainDataGetResponse;
 import sopt.market.product.entity.Product;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class ProductService {
     private final ProductRepository productRepository;
 
