@@ -12,6 +12,7 @@ import sopt.market.product.dto.response.MainDataGetResponse;
 import sopt.market.product.service.ProductService;
 
 import static sopt.market.common.dto.SuccessResponse.success;
+import static sopt.market.product.message.successMessage.GET_DETAILDATAS;
 import static sopt.market.product.message.successMessage.GET_MAINDATAS;
 
 @RestController
@@ -35,6 +36,7 @@ public class ProductController {
     public ResponseEntity<SuccessResponse<DetailDataGetResponse>> getDetailData
             (@PathVariable long productId)
     {
-
+        DetailDataGetResponse detailData = productService.getDetailData(productId);
+        return ResponseEntity.ok().body(success(GET_DETAILDATAS.getMessage(), detailData));
     }
 }
