@@ -22,28 +22,28 @@ public class GlobalExceptionHandler {
     public ResponseEntity<BaseResponse> Exception(Exception exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.SERVER_ERROR;
-        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getMessage()));
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getHttpStatus().value(), errorCode.getMessage()));
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<BaseResponse> handleMethodNotAllowed(HttpRequestMethodNotSupportedException exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.METHOD_NOT_ALLOWED;
-        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getMessage()));
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getHttpStatus().value(), errorCode.getMessage()));
     }
 
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<BaseResponse> handleNullPointer(NullPointerException exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.BAD_REQUEST;
-        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getMessage()));
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getHttpStatus().value(), errorCode.getMessage()));
     }
 
     @ExceptionHandler(ChangeSetPersister.NotFoundException.class)
     public ResponseEntity<BaseResponse> handleNotFound(ChangeSetPersister.NotFoundException exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.NOT_FOUND;
-        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getMessage()));
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getHttpStatus().value(), errorCode.getMessage()));
     }
 
 }
