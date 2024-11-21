@@ -7,6 +7,7 @@ import sopt.market.product.dto.response.MainDataGetResponse;
 import sopt.market.product.entity.Product;
 import sopt.market.product.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,13 +22,18 @@ public class ProductService {
     }
 
     public MainDataGetResponse getMainData(){
-        List<Product> products = productRepository.getRandomProducts(15);
-
-        List<Product> sortedProducts = products.stream()
-                .sorted((p1, p2) -> Integer.compare(p2.getView(), p1.getView()))
+        List<Product> allProducts = productRepository.findAll();
+        List<Product> sorted5Products = allProducts.stream()
+                .sorted((p1,p2)-> Integer.compare(p2.getView(), p1.getView()))
+                .limit(5)
                 .toList();
 
-        return MainDataGetResponse.from(sortedProducts);
+        List<Product> products = productRepository.getRandomProducts(10);
+
+        List<Product> combinedProducts = new ArrayList<>(products);
+        combinedProducts.addAll(sorted5Products);
+
+        return MainDataGetResponse.from(combinedProducts);
     }
 
     public DetailDataGetResponse getDetailData(Long id){
