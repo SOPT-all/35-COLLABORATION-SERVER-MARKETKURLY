@@ -27,6 +27,7 @@ public class ProductController {
 
     @GetMapping("/v1/products/main")
     public ResponseEntity<SuccessResponse<MainDataGetResponse>> getMainData(){
+
         MainDataGetResponse mainData = productService.getMainData();
         return ResponseEntity.ok().body(success(GET_MAINDATAS.getMessage(), mainData));
 
