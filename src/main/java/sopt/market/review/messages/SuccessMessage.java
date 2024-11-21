@@ -1,10 +1,10 @@
 package sopt.market.review.messages;
 
-public enum successMessage {
+public enum SuccessMessage {
 
     GET_REVIEWS("리뷰 불러오기 성공");
 
-    successMessage(String message) {
+    SuccessMessage(String message) {
         this.message = message;
     }
 
