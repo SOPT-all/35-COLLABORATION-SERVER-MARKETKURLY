@@ -22,18 +22,15 @@ public class ProductService {
     }
 
     public MainDataGetResponse getMainData(){
-        List<Product> allProducts = productRepository.findAll();
-        List<Product> sorted5Products = allProducts.stream()
-                .sorted((p1,p2)-> Integer.compare(p2.getView(), p1.getView()))
-                .limit(5)
-                .toList();
+
+        List<Product> sorted5Products = productRepository.findTop5ByView();
 
         List<Product> products = productRepository.getRandomProducts(10);
 
-        List<Product> combinedProducts = new ArrayList<>(products);
-        combinedProducts.addAll(sorted5Products);
+        List<Product> mainTopProducts = products.subList(0,5);
+        List<Product> mainBottomProducts = products.subList(5,10);
 
-        return MainDataGetResponse.from(combinedProducts);
+        return MainDataGetResponse.from(mainTopProducts, sorted5Products, mainBottomProducts);
     }
 
     public DetailDataGetResponse getDetailData(Long id){
