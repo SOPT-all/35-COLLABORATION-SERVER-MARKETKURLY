@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpServerErrorException;
 import sopt.market.common.dto.BaseResponse;
 import sopt.market.common.dto.ErrorResponse;
 import sopt.market.common.exception.errorcode.ErrorCode;
@@ -17,7 +18,7 @@ public class GlobalExceptionHandler {
 
     private static final Logger logger = Logger.getLogger(GlobalExceptionHandler.class.getName());
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(HttpServerErrorException.InternalServerError.class)
     public ResponseEntity<BaseResponse> Exception(Exception exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.SERVER_ERROR;
