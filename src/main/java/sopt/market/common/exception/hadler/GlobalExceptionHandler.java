@@ -22,28 +22,28 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> Exception(Exception exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.SERVER_ERROR;
-        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getHttpStatus().value(), errorCode.getMessage()));
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getMessage()));
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<ErrorResponse> handleMethodNotAllowed(HttpRequestMethodNotSupportedException exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.METHOD_NOT_ALLOWED;
-        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getHttpStatus().value(), errorCode.getMessage()));
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getMessage()));
     }
 
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<ErrorResponse> handleNullPointer(NullPointerException exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.BAD_REQUEST;
-        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getHttpStatus().value(), errorCode.getMessage()));
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getMessage()));
     }
 
     @ExceptionHandler(ChangeSetPersister.NotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFound(ChangeSetPersister.NotFoundException exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.NOT_FOUND;
-        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getHttpStatus().value(), errorCode.getMessage()));
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getMessage()));
     }
 
 }
