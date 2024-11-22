@@ -10,7 +10,7 @@ public interface ReviewProjection {
 
     float getScore();
 
-    boolean isAdd();
+    boolean getIsAdd();
 
     String getImage1();
 
