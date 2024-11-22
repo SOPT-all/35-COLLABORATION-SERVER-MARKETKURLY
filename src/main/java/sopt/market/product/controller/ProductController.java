@@ -1,6 +1,5 @@
 package sopt.market.product.controller;
 
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sopt.market.common.dto.SuccessResponse;
@@ -9,8 +8,8 @@ import sopt.market.product.dto.response.MainDataGetResponse;
 import sopt.market.product.service.ProductService;
 
 import static sopt.market.common.dto.SuccessResponse.success;
-import static sopt.market.product.message.successMessage.GET_DETAILDATAS;
-import static sopt.market.product.message.successMessage.GET_MAINDATAS;
+import static sopt.market.product.message.SuccessMessage.GET_DETAILDATAS;
+import static sopt.market.product.message.SuccessMessage.GET_MAINDATAS;
 
 @RestController
 @RequestMapping("/api")
@@ -24,6 +23,7 @@ public class ProductController {
 
     @GetMapping("/v1/products/main")
     public ResponseEntity<SuccessResponse<MainDataGetResponse>> getMainData(){
+
         MainDataGetResponse mainData = productService.getMainData();
         return ResponseEntity.ok().body(success(GET_MAINDATAS.getMessage(), mainData));
 

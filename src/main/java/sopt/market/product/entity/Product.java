@@ -57,9 +57,6 @@ public class Product {
     @Enumerated(value = EnumType.STRING)
     CategoryScope category;
 
-    @Column(length = 50)
-    String livestock;
-
     String allergy;
 
     @Column(nullable = false)
@@ -82,7 +79,6 @@ public class Product {
             Float brix,
             String notification,
             CategoryScope category,
-            String livestock,
             String allergy,
             Integer view
     )
@@ -103,7 +99,6 @@ public class Product {
             this.brix = brix;
             this.notification = notification;
             this.category = category;
-            this.livestock = livestock;
             this.allergy = allergy;
             this.view = view;
     }
@@ -174,10 +169,6 @@ public class Product {
 
     public CategoryScope getCategory() {
         return category;
-    }
-
-    public String getLivestock() {
-        return livestock;
     }
 
     public String getAllergy() {

@@ -22,8 +22,7 @@ public record DetailDataGetResponse(
         Float brix,
         String notification,
         CategoryScope category,
-        String livestock,
-        String allergy,
+        String allergy
         Boolean isInterest
 ) {
     public static DetailDataGetResponse from(final Product product, final Boolean isInterest) {
@@ -45,7 +44,6 @@ public record DetailDataGetResponse(
                 product.getBrix(),
                 product.getNotification(),
                 product.getCategory(),
-                product.getLivestock(),
                 product.getAllergy(),
                 isInterest
         );

@@ -12,12 +12,14 @@ import sopt.market.product.dto.response.MainDataGetResponse;
 import sopt.market.product.entity.Product;
 import sopt.market.product.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
+
     private final ProductRepository productRepository;
     private final InterestRepository interestRepository ;
     private final MemberRepository memberRepository;
@@ -32,13 +34,15 @@ public class ProductService {
     }
 
     public MainDataGetResponse getMainData(){
-        List<Product> products = productRepository.getRandomProducts(15);
 
-        List<Product> sortedProducts = products.stream()
-                .sorted((p1, p2) -> Integer.compare(p2.getView(), p1.getView()))
-                .toList();
+        List<Product> sorted5Products = productRepository.findTop5ByView();
 
-        return MainDataGetResponse.from(sortedProducts);
+        List<Product> products = productRepository.getRandomProducts(10);
+
+        List<Product> mainTopProducts = products.subList(0,5);
+        List<Product> mainBottomProducts = products.subList(5,10);
+
+        return MainDataGetResponse.from(mainTopProducts, sorted5Products, mainBottomProducts);
     }
 
     public DetailDataGetResponse getDetailData(Long productId, Long memberId){
@@ -47,7 +51,7 @@ public class ProductService {
                 .orElseThrow(()-> new EntityNotFoundException("해당 상품이 없습니다."));
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(()-> new EntityNotFoundException("일치하는 유저가 없습니다."));
+                .orElseThrow(()-> new EntityNotFoundException("일치하는 유저가 없습니다));
         Optional<Interest> interest = interestRepository.findByMemberAndProduct(member, product);
         boolean isInterest = interest.isPresent();
 
