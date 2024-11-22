@@ -13,4 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> getRandomProducts(int count);
 
     Optional<Product> findById(Long id);
+
+    @Query(value = "SELECT * FROM products ORDER BY view DESC LIMIT 5", nativeQuery = true)
+    List<Product> findTop5ByView();
 }

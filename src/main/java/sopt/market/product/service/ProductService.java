@@ -1,5 +1,6 @@
 package sopt.market.product.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.boot.context.annotation.DeterminableImports;
 import org.springframework.stereotype.Service;
 import sopt.market.product.dto.response.DetailDataGetResponse;
@@ -22,23 +23,20 @@ public class ProductService {
     }
 
     public MainDataGetResponse getMainData(){
-        List<Product> allProducts = productRepository.findAll();
-        List<Product> sorted5Products = allProducts.stream()
-                .sorted((p1,p2)-> Integer.compare(p2.getView(), p1.getView()))
-                .limit(5)
-                .toList();
+
+        List<Product> sorted5Products = productRepository.findTop5ByView();
 
         List<Product> products = productRepository.getRandomProducts(10);
 
-        List<Product> combinedProducts = new ArrayList<>(products);
-        combinedProducts.addAll(sorted5Products);
+        List<Product> mainTopProducts = products.subList(0,5);
+        List<Product> mainBottomProducts = products.subList(5,10);
 
-        return MainDataGetResponse.from(combinedProducts);
+        return MainDataGetResponse.from(mainTopProducts, sorted5Products, mainBottomProducts);
     }
 
     public DetailDataGetResponse getDetailData(Long id){
         Product product = productRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("해당 상품이 없습니다."));
+                .orElseThrow(()-> new EntityNotFoundException());
         return DetailDataGetResponse.from(product);
     }
 }

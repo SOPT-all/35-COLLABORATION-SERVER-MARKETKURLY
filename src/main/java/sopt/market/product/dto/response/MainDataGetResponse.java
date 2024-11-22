@@ -1,17 +1,24 @@
 package sopt.market.product.dto.response;
 
+import com.sun.tools.javac.Main;
 import sopt.market.product.entity.Product;
 
 import java.util.List;
 
 public record MainDataGetResponse(
-        List<MainGetResponse> products
+        List<MainGetResponse> mainTopProducts,
+        List<MainGetResponse> mainMiddleProducts,
+        List<MainGetResponse> mainBottomData
 ) {
-    public static MainDataGetResponse from(final List<Product> products){
+    public static MainDataGetResponse from(
+            final List<Product> topProducts,
+            final List<Product> middleProducts,
+            final List<Product> bottomProducts
+    ){
         return new MainDataGetResponse(
-                products.stream()
-                        .map(MainGetResponse::from)
-                        .toList()
+                topProducts.stream().map(MainGetResponse::from).toList(),
+                middleProducts.stream().map(MainGetResponse::from).toList(),
+                bottomProducts.stream().map(MainGetResponse::from).toList()
         );
     }
 
