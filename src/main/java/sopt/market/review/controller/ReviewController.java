@@ -10,7 +10,7 @@ import sopt.market.review.dto.response.ReviewsGetResponse;
 import sopt.market.review.service.ReviewService;
 
 import static sopt.market.common.dto.SuccessResponse.success;
-import static sopt.market.review.messages.successMessage.GET_REVIEWS;
+import static sopt.market.review.messages.SuccessMessage.GET_REVIEWS;
 
 @RestController
 @RequestMapping("/api")
