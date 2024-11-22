@@ -15,7 +15,7 @@ public class Product {
 
     @Column(nullable = false, length = 10)
     @Enumerated(value = EnumType.STRING)
-    DelieveryScope delieveryType;
+    DeliveryScope deliveryType;
 
     @Column(nullable = false, length = 30)
     String seller;
@@ -68,7 +68,7 @@ public class Product {
     public Product(
             Long id,
             String name,
-            DelieveryScope deliveryType,
+            DeliveryScope deliveryType,
             String seller,
             Integer price,
             Integer discount,
@@ -89,7 +89,7 @@ public class Product {
     {
             this.id = id;
             this.name = name;
-            this.delieveryType = deliveryType;
+            this.deliveryType = deliveryType;
             this.seller = seller;
             this.price = price;
             this.discount = discount;
@@ -120,8 +120,8 @@ public class Product {
         return name;
     }
 
-    public DelieveryScope getDelieveryType() {
-        return delieveryType;
+    public DeliveryScope getDeliveryType() {
+        return deliveryType;
     }
 
     public String getSeller() {
@@ -186,5 +186,17 @@ public class Product {
 
     public Integer getView() {
         return view;
+    }
+
+    public Integer getDiscountedPrice() {
+
+    }
+
+    public Boolean getIsInterested(){
+
+    }
+
+    public Integer getMembersDiscountedPrice(){
+
     }
 }
