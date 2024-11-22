@@ -1,5 +1,6 @@
 package sopt.market.common.exception.hadler;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -39,7 +40,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(errorCode.getHttpStatus()).body(ErrorResponse.of(errorCode.getMessage()));
     }
 
-    @ExceptionHandler(ChangeSetPersister.NotFoundException.class)
+    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFound(ChangeSetPersister.NotFoundException exception) {
         logger.log(Level.WARNING,exception.getMessage());
         ErrorCode errorCode = ErrorCode.NOT_FOUND;

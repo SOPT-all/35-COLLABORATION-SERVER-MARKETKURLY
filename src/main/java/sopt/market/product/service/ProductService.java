@@ -1,5 +1,6 @@
 package sopt.market.product.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.boot.context.annotation.DeterminableImports;
 import org.springframework.stereotype.Service;
 import sopt.market.product.dto.response.DetailDataGetResponse;
@@ -35,7 +36,7 @@ public class ProductService {
 
     public DetailDataGetResponse getDetailData(Long id){
         Product product = productRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("해당 상품이 없습니다."));
+                .orElseThrow(()-> new EntityNotFoundException());
         return DetailDataGetResponse.from(product);
     }
 }
