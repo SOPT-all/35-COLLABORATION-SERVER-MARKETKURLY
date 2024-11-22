@@ -2,10 +2,7 @@ package sopt.market.product.controller;
 
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sopt.market.common.dto.SuccessResponse;
 import sopt.market.product.dto.response.DetailDataGetResponse;
 import sopt.market.product.dto.response.MainDataGetResponse;
@@ -34,9 +31,9 @@ public class ProductController {
 
     @GetMapping("/v1/products/{productId}")
     public ResponseEntity<SuccessResponse<DetailDataGetResponse>> getDetailData
-            (@PathVariable long productId)
+            (@PathVariable long productId, @RequestHeader long memberId)
     {
-        DetailDataGetResponse detailData = productService.getDetailData(productId);
+        DetailDataGetResponse detailData = productService.getDetailData(productId, memberId);
         return ResponseEntity.ok().body(success(GET_DETAILDATAS.getMessage(), detailData));
     }
 }

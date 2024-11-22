@@ -11,7 +11,6 @@ import java.util.Optional;
 public interface InterestRepository extends JpaRepository<Interest,Long> {
 
     Optional<Interest> findByMemberAndProduct(Member member, Product product);
-
     List<Interest> findAllByMember(Member member);
 
     void deleteByMemberAndProduct(Member member, Product product);

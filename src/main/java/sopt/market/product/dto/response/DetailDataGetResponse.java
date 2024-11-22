@@ -26,7 +26,7 @@ public record DetailDataGetResponse(
         String allergy,
         Boolean isInterest
 ) {
-    public static DetailDataGetResponse from(final Product product) {
+    public static DetailDataGetResponse from(final Product product, final Boolean isInterest) {
         return new DetailDataGetResponse(
                 product.getName(),
                 product.getPrice(),
@@ -47,7 +47,7 @@ public record DetailDataGetResponse(
                 product.getCategory(),
                 product.getLivestock(),
                 product.getAllergy(),
-                product.getIsInterested()
+                isInterest
         );
     }
 }
