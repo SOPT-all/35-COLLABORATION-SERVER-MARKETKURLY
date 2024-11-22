@@ -189,7 +189,10 @@ public class Product {
     }
 
     public Integer getDiscountedPrice() {
+        float discountedPrice = (float) (this.price - (this.price * this.discount * 0.01));
+        Integer roundedDiscountedPrice = (int) (discountedPrice/100) * 100;
 
+        return roundedDiscountedPrice;
     }
 
     public Boolean getIsInterested(){
@@ -197,6 +200,10 @@ public class Product {
     }
 
     public Integer getMembersDiscountedPrice(){
+        float discountedMembersPrice = (float)(this.price - (this.price * this.membersDiscount * 0.01));
+        Integer roundedMembersDiscountedPrice = (int)(discountedMembersPrice/100) * 100;
+
+        return roundedMembersDiscountedPrice;
 
     }
 }
