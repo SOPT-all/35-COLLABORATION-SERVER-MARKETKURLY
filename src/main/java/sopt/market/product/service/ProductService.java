@@ -50,11 +50,14 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(()-> new EntityNotFoundException("해당 상품이 없습니다."));
 
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(()-> new EntityNotFoundException("일치하는 유저가 없습니다));
-        Optional<Interest> interest = interestRepository.findByMemberAndProduct(member, product);
-        boolean isInterest = interest.isPresent();
+        Member member = memberRepository.findById(memberId).orElse(null);
 
+        boolean isInterest = false;
+
+        if(member != null) {
+            Optional<Interest> interest = interestRepository.findByMemberAndProduct(member, product);
+            isInterest = interest.isPresent();
+        }
         return DetailDataGetResponse.from(product, isInterest);
     }
 }

@@ -31,9 +31,10 @@ public class ProductController {
 
     @GetMapping("/v1/products/{productId}")
     public ResponseEntity<SuccessResponse<DetailDataGetResponse>> getDetailData
-            (@PathVariable long productId, @RequestHeader long memberId)
+            (@PathVariable long productId, @RequestHeader(value = "memberId", required = false, defaultValue = "0") long memberId)
     {
         DetailDataGetResponse detailData = productService.getDetailData(productId, memberId);
         return ResponseEntity.ok().body(success(GET_DETAILDATAS.getMessage(), detailData));
     }
 }
+
