@@ -50,7 +50,7 @@ public class Product {
     @Column
     Float brix;
 
-    @Column(nullable = false, length = 300)
+    @Column(length = 300)
     String notification;
 
     @Column(nullable = false, length=30)
