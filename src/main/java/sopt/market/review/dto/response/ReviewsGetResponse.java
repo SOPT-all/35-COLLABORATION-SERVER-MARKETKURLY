@@ -29,7 +29,7 @@ public record ReviewsGetResponse(
                     review.getUserName(),
                     review.getContent(),
                     review.getScore(),
-                    review.isAdd(),
+                    review.getIsAdd(),
                     review.getImage1(),
                     review.getImage2(),
                     review.getImage3(),

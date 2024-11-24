@@ -1,16 +1,18 @@
 package sopt.market.product.dto.response;
 
 import sopt.market.product.entity.CategoryScope;
-import sopt.market.product.entity.DelieveryScope;
+import sopt.market.product.entity.DeliveryScope;
 import sopt.market.product.entity.Product;
 
 public record DetailDataGetResponse(
         String name,
         Integer price,
         Integer discount,
+        Integer discountedPrice,
         String image,
         Integer membersDiscount,
-        DelieveryScope delieveryType,
+        Integer membersDiscountedPrice,
+        DeliveryScope deliveryType,
         String seller,
         String origin,
         String packagingType,
@@ -20,16 +22,19 @@ public record DetailDataGetResponse(
         Float brix,
         String notification,
         CategoryScope category,
-        String allergy
+        String allergy,
+        Boolean isInterest
 ) {
-    public static DetailDataGetResponse from(final Product product) {
+    public static DetailDataGetResponse from(final Product product, final Boolean isInterest) {
         return new DetailDataGetResponse(
                 product.getName(),
                 product.getPrice(),
                 product.getDiscount(),
+                product.getDiscountedPrice(),
                 product.getImage(),
                 product.getMembersDiscount(),
-                product.getDelieveryType(),
+                product.getMembersDiscountedPrice(),
+                product.getDeliveryType(),
                 product.getSeller(),
                 product.getOrigin(),
                 product.getPackagingType(),
@@ -39,7 +44,8 @@ public record DetailDataGetResponse(
                 product.getBrix(),
                 product.getNotification(),
                 product.getCategory(),
-                product.getAllergy()
+                product.getAllergy(),
+                isInterest
         );
     }
 }

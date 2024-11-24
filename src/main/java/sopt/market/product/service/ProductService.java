@@ -3,6 +3,10 @@ package sopt.market.product.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.boot.context.annotation.DeterminableImports;
 import org.springframework.stereotype.Service;
+import sopt.market.like.entity.Interest;
+import sopt.market.like.repository.InterestRepository;
+import sopt.market.member.entity.Member;
+import sopt.market.member.repository.MemberRepository;
 import sopt.market.product.dto.response.DetailDataGetResponse;
 import sopt.market.product.dto.response.MainDataGetResponse;
 import sopt.market.product.entity.Product;
@@ -17,9 +21,16 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final InterestRepository interestRepository ;
+    private final MemberRepository memberRepository;
 
-    public ProductService(ProductRepository productRepository){
+    public ProductService(
+            ProductRepository productRepository,
+            InterestRepository interestRepository,
+            MemberRepository memberRepository){
         this.productRepository = productRepository;
+        this.interestRepository = interestRepository;
+        this.memberRepository = memberRepository;
     }
 
     public MainDataGetResponse getMainData(){
@@ -34,9 +45,19 @@ public class ProductService {
         return MainDataGetResponse.from(mainTopProducts, sorted5Products, mainBottomProducts);
     }
 
-    public DetailDataGetResponse getDetailData(Long id){
-        Product product = productRepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException());
-        return DetailDataGetResponse.from(product);
+    public DetailDataGetResponse getDetailData(Long productId, Long memberId){
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(()-> new EntityNotFoundException("해당 상품이 없습니다."));
+
+        Member member = memberRepository.findById(memberId).orElse(null);
+
+        boolean isInterest = false;
+
+        if(member != null) {
+            Optional<Interest> interest = interestRepository.findByMemberAndProduct(member, product);
+            isInterest = interest.isPresent();
+        }
+        return DetailDataGetResponse.from(product, isInterest);
     }
 }
