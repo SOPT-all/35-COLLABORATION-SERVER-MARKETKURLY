@@ -30,9 +30,9 @@ public record ReviewsGetResponse(
                     review.getContent(),
                     review.getScore(),
                     review.getIsAdd(),
-                    review.getImage1(),
-                    review.getImage2(),
-                    review.getImage3(),
+                    review.getImage1() == null ? "" : review.getImage1(),
+                    review.getImage2() == null ? "" : review.getImage2(),
+                    review.getImage3() == null ? "" : review.getImage3(),
                     review.getCreatedAt()
             );
         }

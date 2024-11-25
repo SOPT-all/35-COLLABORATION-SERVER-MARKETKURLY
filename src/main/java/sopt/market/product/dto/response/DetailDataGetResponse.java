@@ -40,11 +40,11 @@ public record DetailDataGetResponse(
                 product.getPackagingType(),
                 product.getSellingUnit(),
                 product.getWeight(),
-                product.getExpiration(),
+                product.getExpiration() == null ? "" : product.getExpiration(),
                 product.getBrix(),
-                product.getNotification(),
+                product.getNotification() == null ? "" : product.getNotification(),
                 product.getCategory(),
-                product.getAllergy(),
+                product.getAllergy() == null ? "" : product.getAllergy(),
                 isInterest
         );
     }
