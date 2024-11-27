@@ -62,6 +62,9 @@ public class Product {
     @Column(nullable = false)
     Integer view;
 
+    @Transient
+    Integer reviewCount;
+
     public Product(
             Long id,
             String name,
@@ -192,5 +195,13 @@ public class Product {
 
         return roundedMembersDiscountedPrice;
 
+    }
+
+    public Integer getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
     }
 }

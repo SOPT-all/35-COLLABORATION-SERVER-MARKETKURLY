@@ -27,7 +27,9 @@ public record MainDataGetResponse(
             String name,
             Integer price,
             Integer discount,
-            String image
+            String image,
+            Integer discountPrice,
+            Integer reviewCount
     ){
         public static MainGetResponse from(final Product product){
             return new MainGetResponse(
@@ -35,7 +37,9 @@ public record MainDataGetResponse(
                     product.getName(),
                     product.getPrice(),
                     product.getDiscount(),
-                    product.getImage()
+                    product.getImage(),
+                    product.getDiscountedPrice(),
+                    product.getReviewCount()
             );
         }
     }
