@@ -11,6 +11,7 @@ import sopt.market.product.dto.response.DetailDataGetResponse;
 import sopt.market.product.dto.response.MainDataGetResponse;
 import sopt.market.product.entity.Product;
 import sopt.market.product.repository.ProductRepository;
+import sopt.market.review.repository.ReviewRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +24,17 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final InterestRepository interestRepository ;
     private final MemberRepository memberRepository;
+    private final ReviewRepository reviewRepository;
 
     public ProductService(
             ProductRepository productRepository,
             InterestRepository interestRepository,
-            MemberRepository memberRepository){
+            MemberRepository memberRepository,
+            ReviewRepository reviewRepository){
         this.productRepository = productRepository;
         this.interestRepository = interestRepository;
         this.memberRepository = memberRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     public MainDataGetResponse getMainData(){
@@ -41,6 +45,10 @@ public class ProductService {
 
         List<Product> mainTopProducts = products.subList(0,5);
         List<Product> mainBottomProducts = products.subList(5,10);
+
+        mainTopProducts.forEach(product -> product.setReviewCount(reviewRepository.countByProduct(product)));
+        sorted5Products.forEach(product -> product.setReviewCount(reviewRepository.countByProduct(product)));
+        mainBottomProducts.forEach(product -> product.setReviewCount(reviewRepository.countByProduct(product)));
 
         return MainDataGetResponse.from(mainTopProducts, sorted5Products, mainBottomProducts);
     }
